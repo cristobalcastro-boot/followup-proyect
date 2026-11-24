@@ -1,0 +1,221 @@
+FOLLOWUP-DASHBOARD
+PLAN DE INTEGRACIÓN DE ARCHIVOS
+
+1. ARCHIVOS COMPARTIDOS
+==================================================
+
+1.1 Archivos funcionales - 23/11/2026 (16 archivos)
+
+.env.example
+package.json
+package-lock.json
+src/servicios/apiServidores.ts
+src/servicios/apiAlertas.ts
+src/servicios/consultaApi.ts
+src/servicios/validarRespuestaAlertas.ts
+src/tipos/conexion.ts
+src/tipos/servidores.ts
+src/tipos/alertas.ts
+src/utilidades/resumen.ts
+src/utilidades/alertas.ts
+src/utilidades/filtrosInventario.ts
+src/utilidades/tipoDispositivo.ts
+src/hooks/coordinadorConsultas.ts
+src/hooks/estadoFuente.ts
+
+
+1.2 Archivos funcionales - 25/11/2026 (20 archivos)
+
+src/app/demostracion/page.tsx
+src/componentes/panel/MensajeEstado.tsx
+src/componentes/panel/PanelEnVivo.tsx
+src/componentes/panel/PanelGlobal.tsx
+src/componentes/panel/TarjetaResumen.tsx
+src/componentes/panel/BotonReintentar.tsx
+src/componentes/panel/GrupoOpciones.tsx
+src/componentes/servidores/IndicadorPorcentaje.tsx
+src/componentes/servidores/TablaServidores.tsx
+src/componentes/servidores/TarjetaServidor.tsx
+src/componentes/servidores/EtiquetaTipoDispositivo.tsx
+src/componentes/servidores/IndicadorAlertasEquipo.tsx
+src/componentes/servidores/InventarioFiltrable.tsx
+src/componentes/alertas/EtiquetasAlerta.tsx
+src/componentes/alertas/ResumenAlertas.tsx
+src/componentes/alertas/SeccionAlertas.tsx
+src/componentes/alertas/TablaAlertas.tsx
+src/demostracion/escenarios.ts
+src/hooks/cicloConsultas.ts
+src/hooks/usePanel.ts
+
+Archivo que se debe eliminar:
+
+src/hooks/useServidores.ts
+
+
+1.3 Archivos de pruebas - 27/11/2026 (8 archivos)
+
+tests/alertas.test.mjs
+tests/consultaApi.test.mjs
+tests/coordinadorConsultas.test.mjs
+tests/escenarios.test.mjs
+tests/estadoFuente.test.mjs
+tests/integracionAlertas.test.mjs
+tests/tipoDispositivo.test.mjs
+tests/validarRespuestaAlertas.test.mjs
+
+
+2. LUNES 23/11/2026
+==================================================
+
+2.1 Integración de configuración y base técnica en DEV
+
+git status
+git fetch origin
+git switch dev
+git pull --ff-only origin dev
+git merge origin/main
+
+Si la rama dev no existe localmente, utilizar:
+
+git switch -c dev --track origin/dev
+
+Copiar únicamente los 16 archivos correspondientes al punto 1.1, respetando sus rutas originales.
+
+git add .env.example
+git add package.json
+git add package-lock.json
+git add src/servicios/apiServidores.ts
+git add src/servicios/apiAlertas.ts
+git add src/servicios/consultaApi.ts
+git add src/servicios/validarRespuestaAlertas.ts
+git add src/tipos/conexion.ts
+git add src/tipos/servidores.ts
+git add src/tipos/alertas.ts
+git add src/utilidades/resumen.ts
+git add src/utilidades/alertas.ts
+git add src/utilidades/filtrosInventario.ts
+git add src/utilidades/tipoDispositivo.ts
+git add src/hooks/coordinadorConsultas.ts
+git add src/hooks/estadoFuente.ts
+
+git status
+git diff --cached --stat
+git diff --cached --name-status
+
+npm ci
+npm test
+npm run build
+
+Si alguna validación falla, detenerse e informar el resultado antes de crear el commit.
+
+git commit -m "feat: incorporar servicios tipos y base tecnica para gestion de alertas"
+
+git push origin dev
+
+No incorporar todavía los archivos del 25/11 ni los archivos de pruebas.
+
+
+3. MIÉRCOLES 25/11/2026
+==================================================
+
+3.1 Integración de componentes visuales, inventario y alertas en DEV
+
+git status
+git switch dev
+git pull --ff-only origin dev
+git fetch origin
+git merge origin/main
+
+Copiar únicamente los 20 archivos correspondientes al punto 1.2, respetando sus rutas originales.
+
+git add src/app/demostracion/page.tsx
+git add src/componentes/panel/MensajeEstado.tsx
+git add src/componentes/panel/PanelEnVivo.tsx
+git add src/componentes/panel/PanelGlobal.tsx
+git add src/componentes/panel/TarjetaResumen.tsx
+git add src/componentes/panel/BotonReintentar.tsx
+git add src/componentes/panel/GrupoOpciones.tsx
+git add src/componentes/servidores/IndicadorPorcentaje.tsx
+git add src/componentes/servidores/TablaServidores.tsx
+git add src/componentes/servidores/TarjetaServidor.tsx
+git add src/componentes/servidores/EtiquetaTipoDispositivo.tsx
+git add src/componentes/servidores/IndicadorAlertasEquipo.tsx
+git add src/componentes/servidores/InventarioFiltrable.tsx
+git add src/componentes/alertas/EtiquetasAlerta.tsx
+git add src/componentes/alertas/ResumenAlertas.tsx
+git add src/componentes/alertas/SeccionAlertas.tsx
+git add src/componentes/alertas/TablaAlertas.tsx
+git add src/demostracion/escenarios.ts
+git add src/hooks/cicloConsultas.ts
+git add src/hooks/usePanel.ts
+
+Eliminar el hook anterior, reemplazado por usePanel.ts:
+
+git rm src/hooks/useServidores.ts
+
+git status
+git diff --cached --stat
+git diff --cached --name-status
+
+npm test
+npm run build
+
+git commit -m "feat: integrar inventario multidispositivo panel de alertas y consultas coordinadas"
+
+git push origin dev
+
+No incorporar todavía los ocho archivos de pruebas.
+
+
+4. VIERNES 27/11/2026
+==================================================
+
+4.1 Integración de archivos de pruebas en DEV
+
+Realizar este paso después de confirmar la integración funcional en MAIN.
+
+git status
+git switch dev
+git pull --ff-only origin dev
+git fetch origin
+git merge origin/main
+
+Copiar los ocho archivos de pruebas correspondientes al punto 1.3.
+
+git add tests/alertas.test.mjs
+git add tests/consultaApi.test.mjs
+git add tests/coordinadorConsultas.test.mjs
+git add tests/escenarios.test.mjs
+git add tests/estadoFuente.test.mjs
+git add tests/integracionAlertas.test.mjs
+git add tests/tipoDispositivo.test.mjs
+git add tests/validarRespuestaAlertas.test.mjs
+
+git status
+git diff --cached --stat
+git diff --cached --name-status
+
+npm test
+npm run build
+
+git commit -m "test: incorporar pruebas de alertas inventario y consultas del dashboard"
+
+git push origin dev
+
+
+5. VALIDACIÓN FINAL
+==================================================
+
+git status
+git log --oneline -10
+
+
+IMPORTANTE:
+
+- No utilizar git add .
+- No compartir ni modificar el archivo .env.local.
+- No incorporar archivos Markdown.
+- No continuar si existen conflictos o fallan las validaciones.
+- Trabajar exclusivamente en DEV.
+- Respetar las rutas originales de los archivos.
+- Incorporar únicamente los archivos correspondientes a cada entrega.
